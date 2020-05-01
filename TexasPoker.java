@@ -1,5 +1,6 @@
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.LayoutManager;
 
 import javax.swing.BorderFactory;
@@ -15,6 +16,10 @@ import java.awt.Color;
 public class TexasPoker {
 
 	private JFrame frame;
+	public JPanel panel1;
+	public JPanel panel2;
+	public JPanel panel3;
+	
 
 	/**
 	 * Launch the application.
@@ -44,6 +49,10 @@ public class TexasPoker {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		panel1 = new JPanel();
+		panel2 = new JPanel();
+		panel3 = new JPanel();
+		
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -61,10 +70,18 @@ public class TexasPoker {
 		
 		
 		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.PAGE_AXIS));
 		centerPanel.setSize(500, 450);
 		centerPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-		centerPanel.add(new JLabel("公共牌，玩家操作，秒表"));
+		centerPanel.add(panel1);
+		centerPanel.add(panel2);
+		centerPanel.add(panel3);
+		panel1.add(new JLabel("秒表"));
+		panel2.add(new JLabel("公共牌"));
+		panel3.add(new JLabel("日志"));
 		frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
+		
+		
 		
 
 		JPanel eastPanel = new JPanel();
