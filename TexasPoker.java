@@ -13,12 +13,23 @@ import javax.swing.border.Border;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-public class TexasPoker {
+public class TexasPoker implements UIController {
 
 	private JFrame frame;
 	public JPanel panel1;
 	public JPanel panel2;
 	public JPanel panel3;
+	public JPanel westpanel;
+	public JPanel eastpanel;
+	public JPanel centerpanel;
+	public JLabel stopwatch;
+	public JLabel pubcard;
+	public JLabel playerlog;
+	
+	
+	
+	
+	
 	
 
 	/**
@@ -31,7 +42,7 @@ public class TexasPoker {
 					TexasPoker window = new TexasPoker();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace();	
 				}
 			}
 		});
@@ -52,6 +63,9 @@ public class TexasPoker {
 		panel1 = new JPanel();
 		panel2 = new JPanel();
 		panel3 = new JPanel();
+		stopwatch = new JLabel("秒表");
+		pubcard = new JLabel("公共牌");
+		playerlog = new JLabel("日志");
 		
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,9 +90,9 @@ public class TexasPoker {
 		centerPanel.add(panel1);
 		centerPanel.add(panel2);
 		centerPanel.add(panel3);
-		panel1.add(new JLabel("秒表"));
-		panel2.add(new JLabel("公共牌"));
-		panel3.add(new JLabel("日志"));
+		panel1.add(stopwatch);
+		panel2.add(pubcard);
+		panel3.add(playerlog);
 		frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
 		
 		
@@ -101,6 +115,25 @@ public class TexasPoker {
 		southPanel.add(new JPlayerMyselfPanel());
 		frame.getContentPane().add(southPanel, BorderLayout.SOUTH);
 		
+		
+	}
+
+	@Override
+	public void update(String s) {
+		// TODO Auto-generated method stub
+		playerlog.setText(s);
+
+	}
+
+	@Override
+	public void update(String s, boolean isYourTurn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(boolean enterGame) {
+		// TODO Auto-generated method stub
 		
 	}
 
