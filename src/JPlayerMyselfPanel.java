@@ -97,19 +97,19 @@ public class JPlayerMyselfPanel extends JPanel {
 	}
 	
 	public void addPrevateCard(Card card) {
-		ImageIcon card1 =;
-		ImageIcon card2 =;
-		card1.setImage(card1.getImage().getScaledInstance(45,50 ,Image.SCALE_DEFAULT ));
-		card2.setImage(card2.getImage().getScaledInstance(45,50 ,Image.SCALE_DEFAULT ));
-		JLabel cradLabel1 = new JLabel();
-		JLabel cradLabel2 = new JLabel();
-		cradLabel1.setIcon(card1);
-		cradLabel2.setIcon(card2);
-		preCards.add(cradLabel1);
-		preCards.add(cradLabel2);
-		for(int i = 0; i< preCards.size(); i++) {
-			panelPreCard.add(preCards.get(i));
-		}
+//		ImageIcon card1 =;
+//		ImageIcon card2 =;
+//		card1.setImage(card1.getImage().getScaledInstance(45,50 ,Image.SCALE_DEFAULT ));
+//		card2.setImage(card2.getImage().getScaledInstance(45,50 ,Image.SCALE_DEFAULT ));
+//		JLabel cradLabel1 = new JLabel();
+//		JLabel cradLabel2 = new JLabel();
+//		cradLabel1.setIcon(card1);
+//		cradLabel2.setIcon(card2);
+//		preCards.add(cradLabel1);
+//		preCards.add(cradLabel2);
+//		for(int i = 0; i< preCards.size(); i++) {
+//			panelPreCard.add(preCards.get(i));
+//		}
 		
 	}
 

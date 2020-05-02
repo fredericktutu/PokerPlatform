@@ -16,6 +16,7 @@ import javax.swing.border.Border;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class TexasPokerUIController implements UIController {
 
@@ -56,17 +57,46 @@ public class TexasPokerUIController implements UIController {
 			int numberOfCardsInThisSuit = suit < 4 ? 13 : 2;
 			publicCardLabels[suit] = new JLabel[numberOfCardsInThisSuit];
 			for (int face = 1; face <= numberOfCardsInThisSuit; ++ face){
-				ImageIcon icon = new ImageIcon(
+				ImageIcon iconOrigin = new ImageIcon(
 					"./image/card_" + 
 					String.valueOf(suit) + "_" +
 					String.valueOf(face) + ".png"
 				);
-				publicCardLabels[suit][face-1] = new JLabel();
-				publicCardLabels[suit][face-1].setIcon(icon);
+				Image image = iconOrigin.getImage();
+				Image newImage = image.getScaledInstance(123, 84, java.awt.Image.SCALE_SMOOTH);
+				ImageIcon icon = new ImageIcon(newImage);
+				
+				JLabel label = new JLabel();
+				label.setIcon(icon);
+				Dimension dim = new Dimension(84, 123);
+				label.setSize(dim);
+				label.setMaximumSize(dim);
+				label.setMinimumSize(dim);
+				label.setPreferredSize(dim);
+				
+				publicCardLabels[suit][face-1] = label;
 			}
 		}
 
 		initialize();
+
+
+		/** test update public cards */
+		Card card1 = new Card(0, 1);
+		Card card2 = new Card(1, 1);
+		Card card3 = new Card(2, 1);
+		Card card4 = new Card(3, 1);
+		Card card5 = new Card(4, 1);
+		ArrayList<Card> testPublicCards = new ArrayList<Card>();
+		testPublicCards.add(card1);
+		testPublicCards.add(card2);
+		testPublicCards.add(card3);
+		testPublicCards.add(card4);
+		testPublicCards.add(card5);
+
+		this.updatePublicCards(testPublicCards);
+		
+
 	}
 
 	/**
