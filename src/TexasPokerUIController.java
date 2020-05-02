@@ -13,7 +13,7 @@ import javax.swing.border.Border;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-public class TexasPoker implements UIController {
+public class TexasPokerUIController implements UIController {
 
 	private JFrame frame = new JFrame();
 	public JPanel panel1 = new JPanel();
@@ -40,7 +40,7 @@ public class TexasPoker implements UIController {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TexasPoker window = new TexasPoker();
+					TexasPokerUIController window = new TexasPokerUIController();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();	
@@ -52,7 +52,7 @@ public class TexasPoker implements UIController {
 	/**
 	 * Create the application.
 	 */
-	public TexasPoker() {
+	public TexasPokerUIController() {
 		initialize();
 	}
 
