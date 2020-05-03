@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class TexasAIController implements UIController {
     public Player player;
@@ -8,15 +9,15 @@ public class TexasAIController implements UIController {
         this.helper = helper;
     }
 
-    public void update(String s, boolean isYourTurn) { // ÓÎÏ·ÖúÀíµ÷ÓÃ£¬¸üÐÂÃüÁîÐÐ
+    public void update(String s, boolean isYourTurn) { // ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (isYourTurn) {
-            if(s.equals("Çë×¼±¸:")){
-                //System.out.println("AI£ºÒÑ×¼±¸ºÃ");
+            if(s.equals("ï¿½ï¿½×¼ï¿½ï¿½:")){
+                //System.out.println("AIï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½");
                 Player2TexasGameHelperCommand command = new Player2TexasGameHelperCommand();
                 command.whatHappen = Player2TexasGameHelperCommand.I_AM_READY;
                 helper.call(player, command);
             } else {
-                //System.out.println("AI£ºÌá½»ÁËÐÅÏ¢");
+                //System.out.println("AIï¿½ï¿½ï¿½á½»ï¿½ï¿½ï¿½ï¿½Ï¢");
                 Player2TexasGameHelperCommand command = new Player2TexasGameHelperCommand();
                 command.whatHappen = Player2TexasGameHelperCommand.I_BET;
                 command.action = Player2TexasGameHelperCommand.ACTION_ABORT_BET;
@@ -29,12 +30,18 @@ public class TexasAIController implements UIController {
 
     }
 
-    public void update(String s) { // Íæ¼Òµ÷ÓÃ£¬¸üÐÂÃüÁîÐÐ£¬ÓÐ¹ØÆ½Ì¨µÄÏûÏ¢¡£
+    public void update(String s) { // ï¿½ï¿½Òµï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½Ð¹ï¿½Æ½Ì¨ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
         return;
     }
 
     public void update(boolean enterGame) {
         return;
     }
+
+	@Override
+	public void updatePublicCards(ArrayList<Card> publicCards) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

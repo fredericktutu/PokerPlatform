@@ -98,6 +98,7 @@ public class JPlayerMyselfPanel extends JPanel {
 	}
 	
 	public void addPrevateCard(Card card) {
+
 		
 		for(int i = 0; i < 4; i++){
 			 for(int j = 1; i <= 13; j++){
@@ -117,7 +118,7 @@ public class JPlayerMyselfPanel extends JPanel {
 		for(int i = 0; i< preCards.size(); i++) {
 			panelPreCard.add(preCards.get(i));
 		}
-		
+
 		//panelPubCard.validate()
 		panelPreCard.validate();
 		

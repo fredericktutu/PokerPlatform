@@ -1,10 +1,12 @@
 
-//Í¼ĞÎ½çÃæ-¡·µÂÆË
+//Í¼ï¿½Î½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-//ÃüÁîĞĞ -¡·µÂÆË
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-//AI -¡· µÂÆË
-public class TexasTerminalController implements UIController { // ÃüÁîĞĞ ¡¶-¡· ÓÎÏ·ÖúÀíÀà
+import java.util.ArrayList;
+
+//AI -ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+public class TexasTerminalController implements UIController { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½-ï¿½ï¿½ ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     TerminalUI ui;
     Player player;
     TexasGameHelper helper;
@@ -14,7 +16,7 @@ public class TexasTerminalController implements UIController { // ÃüÁîĞĞ ¡¶-¡· Ó
         this.player = player;
     }
 
-    public void user_input_handler(int[] input) { // ÃüÁîĞĞ½çÃæµ÷ÓÃÒ£¿ØÆ÷£¬Ò£¿ØÆ÷»áÈ¥ÕÒÓÎÏ·ÖúÀí
+    public void user_input_handler(int[] input) { // ï¿½ï¿½ï¿½ï¿½ï¿½Ğ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
         Player2TexasGameHelperCommand command = new Player2TexasGameHelperCommand();
         command.whatHappen = Player2TexasGameHelperCommand.I_BET;
         switch (input[0]) {
@@ -41,21 +43,25 @@ public class TexasTerminalController implements UIController { // ÃüÁîĞĞ ¡¶-¡· Ó
         helper.call(player, command);
     }
 
-    public void update(String s, boolean isYourTurn) { // ÓÎÏ·ÖúÀíµ÷ÓÃ£¬¸üĞÂÃüÁîĞĞ
-        ui.show(s); // Í¼ĞÎ½çÃæ¸üĞÂ
+    public void update(String s, boolean isYourTurn) { // ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        ui.show(s); // Í¼ï¿½Î½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (isYourTurn) {
-            ui.user_input_event(); // ÃüÁîĞĞ£¬½ÓÊÜÒ»¸öÊäÈë
+            ui.user_input_event(); // ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
     }
 
-    public void update(String s) { // Íæ¼Òµ÷ÓÃ£¬¸üĞÂÃüÁîĞĞ£¬ÓĞ¹ØÆ½Ì¨µÄÏûÏ¢¡£
+    public void update(String s) { // ï¿½ï¿½Òµï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½Ğ¹ï¿½Æ½Ì¨ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
         ui.show(s);
     }
 
     public void update(boolean enterGame) {
         if(enterGame) {
-            ui.show("ÒÑ¾­ÎªÄú·ÖÅä´óÌüÖúÀí,Çë´´½¨·¿¼ä");
-            ui.user_input_event(); //ÃüÁîĞĞ½ÓÊÜÊäÈë£¬ÆÚ´ıÓÃ»§´´½¨ÓÎÏ·
+            ui.show("ï¿½Ñ¾ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ë´´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+            ui.user_input_event(); //ï¿½ï¿½ï¿½ï¿½ï¿½Ğ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½Ú´ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·
         }
     }
+
+    public void updatePublicCards(ArrayList<Card> publicCards){}
+
+    
 }
