@@ -20,7 +20,7 @@ import java.awt.Dimension;
 
 public class TexasPokerUIController implements UIController {
 
-	private final JFrame frame = new JFrame();
+	public final JFrame frame = new JFrame();
 	public JPanel panelStopwatch = new JPanel();
 	public JPanel panelPubCard = new JPanel();
 	public JPanel panelPlayerLog = new JPanel();
@@ -31,6 +31,7 @@ public class TexasPokerUIController implements UIController {
 	public JLabel[][] publicCardLabels = new JLabel[5][];
 	public JLabel playerLog = new JLabel("日志");
 	public JPanel southPanel = new JPanel();
+	public JPlayerMyselfPanel myselfPanel = new JPlayerMyselfPanel();
 
 	/**
 	 * Launch the application.
@@ -111,9 +112,7 @@ public class TexasPokerUIController implements UIController {
 		westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.PAGE_AXIS));
 		westPanel.setSize(200, 450);
 		westPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
-		westPanel.add(new JPlayerPanel());
-		westPanel.add(new JPlayerPanel());
-		westPanel.add(new JPlayerPanel());
+	
 		frame.getContentPane().add(westPanel, BorderLayout.WEST);
 
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.PAGE_AXIS));
@@ -133,15 +132,13 @@ public class TexasPokerUIController implements UIController {
 		eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.PAGE_AXIS));
 		eastPanel.setSize(200, 450);
 		eastPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-		eastPanel.add(new JPlayerPanel());
-		eastPanel.add(new JPlayerPanel());
-		eastPanel.add(new JPlayerPanel());
+
 		frame.getContentPane().add(eastPanel, BorderLayout.EAST);
 
 		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
 		southPanel.setSize(50, 45);
 		southPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-		southPanel.add(new JPlayerMyselfPanel());
+		southPanel.add(myselfPanel);
 		frame.getContentPane().add(southPanel, BorderLayout.SOUTH);
 
 	}
@@ -180,6 +177,7 @@ public class TexasPokerUIController implements UIController {
 		panelPubCard.revalidate();
 
 	}
+	
 	
 	
 

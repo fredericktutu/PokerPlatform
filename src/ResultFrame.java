@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -14,6 +16,12 @@ import javax.swing.JPanel;
 public class ResultFrame {
 
 	private JFrame frame;
+	public JPanel titlePanel = new JPanel();
+	public JPanel centerPanel = new JPanel();
+	public JLabel resultLabel = new JLabel("结果显示区");
+	public JButton exitBtn = new JButton("退出");
+	public JButton restartBtn = new JButton("重新开始");
+	public JButton nextBtn = new JButton("下一轮");
 
 	/**
 	 * Launch the application.
@@ -47,7 +55,7 @@ public class ResultFrame {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel titlePanel = new JPanel();
+		//JPanel titlePanel = new JPanel();
 		Dimension titlePanelDim = new Dimension(450, 120);
 		titlePanel.setSize(titlePanelDim);
 		titlePanel.setMaximumSize(titlePanelDim);
@@ -55,27 +63,65 @@ public class ResultFrame {
 		titlePanel.setPreferredSize(titlePanelDim);
 		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.PAGE_AXIS));
 		titlePanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-		titlePanel.add(new JLabel("结果显示区"));
+		titlePanel.add(resultLabel);
 		frame.getContentPane().add(titlePanel, BorderLayout.NORTH);
 		
-		JPanel centerPanel = new JPanel();
+		//JPanel centerPanel = new JPanel();
 		centerPanel.setSize(500, 450);
 		centerPanel.setLayout(new FlowLayout());
 		centerPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
 		
-		JButton btn1 = new JButton("退出");
+		//JButton btn1 = new JButton("退出");
+		//JButton btn2 = new JButton("重新开始");
+		//JButton btn3 = new JButton("下一轮");
 		
-		JButton btn2 = new JButton("重新开始");
-		JButton btn3 = new JButton("下一轮");
+		exitBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+				
+			}
+		});
+		restartBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					LoginFrame window = new LoginFrame();
+					window.frame.setVisible(true);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				
+			}
+		});
+		nextBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					final TexasPokerUIController window = new TexasPokerUIController();
+					window.frame.setVisible(true);
+				} catch (final Exception ev) {
+					ev.printStackTrace();
+				}
+			}
+		});
 		
+		centerPanel.add(exitBtn);
+		centerPanel.add(restartBtn);
+		centerPanel.add(nextBtn);
 		
-		centerPanel.add(btn1);
-		centerPanel.add(btn2);
-		centerPanel.add(btn3);
 		
 		frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
 		
 		
 	}
+	
+	public void updateResult(String result) {
+		resultLabel.setText(result);
+		resultLabel.validate();
+		resultLabel.revalidate();
+	}
+	
+	
 
 }

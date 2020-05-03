@@ -11,9 +11,14 @@ import javax.swing.JPanel;
 
 
 public class JPlayerPanel extends JPanel {
+	public JPanel usernameAndChip = new JPanel();
+	public JPanel profilePanel = new JPanel();
+	public JLabel usernameLabel = new JLabel("用户名");
+	public JLabel chipLabel = new JLabel("筹码");
+	public JPanel cardPanel = new JPanel(new FlowLayout());
 	
 	public JPlayerPanel() {
-		JPanel profilePanel = new JPanel();
+		//JPanel profilePanel = new JPanel();
 		JLabel portrait = new JLabel();
 		ImageIcon por = new ImageIcon("./image/portrait.png");
 		por.setImage(por.getImage().getScaledInstance(45,50 ,Image.SCALE_DEFAULT ));
@@ -28,16 +33,16 @@ public class JPlayerPanel extends JPanel {
 		profilePanel.setRequestFocusEnabled(false);
 
 		
-		JLabel usernameLabel = new JLabel("用户名");
+		//JLabel usernameLabel = new JLabel("用户名");
 		Dimension usernameLabelDim = new Dimension(70, 30);
 		usernameLabel.setSize(usernameLabelDim);
 		usernameLabel.setMaximumSize(usernameLabelDim);
 		usernameLabel.setMinimumSize(usernameLabelDim);
 		usernameLabel.setPreferredSize(usernameLabelDim);
-		JLabel chipLabel = new JLabel("筹码");
+		//JLabel chipLabel = new JLabel("筹码");
 		chipLabel.setSize(70, 30);
 		
-		JPanel usernameAndChip = new JPanel();
+		//JPanel usernameAndChip = new JPanel();
 		usernameAndChip.setLayout(new FlowLayout());
 		usernameAndChip.add(usernameLabel);
 		usernameAndChip.add(chipLabel);
@@ -68,8 +73,13 @@ public class JPlayerPanel extends JPanel {
 		JLabel playerWordsLabel = new JLabel("玩家文字语言");
 		playerWordsLabel.setSize(180, 30);
 		
+		Dimension playerPanelDim = new Dimension(150, 200);
+		
 		this.setLayout(new BorderLayout());
-		this.setSize(200, 100);
+		this.setSize(playerPanelDim);
+		this.setMaximumSize(playerPanelDim);
+		this.setMinimumSize(playerPanelDim);
+		this.setPreferredSize(playerPanelDim);
 		
 		this.add(profilePanel, BorderLayout.WEST);
 //		this.add(usernameLabel);
@@ -79,5 +89,16 @@ public class JPlayerPanel extends JPanel {
 		this.add(playerWordsLabel, BorderLayout.SOUTH);
 		this.setVisible(true);
 	}
+	
+	public void updateChip(int chipNum) {
+		chipLabel.setText(String.valueOf(chipNum));
+		chipLabel.validate();
+		chipLabel.revalidate();
+	}
 
+	public void updateName(String name) {
+		usernameLabel.setText(name);
+		usernameLabel.validate();
+		usernameLabel.revalidate();
+	}
 }
