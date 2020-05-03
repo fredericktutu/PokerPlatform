@@ -31,19 +31,6 @@ public class TexasPokerUIController implements UIController {
 	public JLabel[][] publicCardLabels = new JLabel[5][];
 	public JLabel playerLog = new JLabel("日志");
 	public JPanel southPanel = new JPanel();
-<<<<<<< HEAD
-	public ImageIcon[][] cardImages = new ImageIcon[4][13];
-	public ArrayList<JLabel> cardLabels = new ArrayList<JLabel>();
-	
-	
-	
-	
-	
-	
-	
-	
-=======
->>>>>>> a6127b26566fcfef13f9bfee549bfb2f3d0f78e1
 
 	/**
 	 * Launch the application.
