@@ -28,8 +28,9 @@ public class TexasPokerUIController implements UIController {
 	public JPanel eastPanel = new JPanel();
 	public JPanel centerPanel = new JPanel();
 	public JLabel stopwatch = new JLabel("秒表");
-	public JLabel[][] publicCardLabels = new JLabel[5][];
-	public JLabel playerLog = new JLabel("日志");
+	//public JLabel[][] publicCardLabels = new JLabel[5][];
+	public JLabel[][] publicCardLabels = new JLabel[4][];
+	public JLabel playerLogLabel = new JLabel("日志");
 	public JPanel southPanel = new JPanel();
 	public JPlayerMyselfPanel myselfPanel = new JPlayerMyselfPanel();
 
@@ -55,7 +56,8 @@ public class TexasPokerUIController implements UIController {
 	public TexasPokerUIController() {
 		/** Initialize Card Icons */
 		for (int suit = 0; suit < publicCardLabels.length; ++ suit){
-			int numberOfCardsInThisSuit = suit < 4 ? 13 : 2;
+			//int numberOfCardsInThisSuit = suit < 4 ? 13 : 2;
+			int numberOfCardsInThisSuit = 13;
 			publicCardLabels[suit] = new JLabel[numberOfCardsInThisSuit];
 			for (int face = 1; face <= numberOfCardsInThisSuit; ++ face){
 				ImageIcon iconOrigin = new ImageIcon(
@@ -87,13 +89,13 @@ public class TexasPokerUIController implements UIController {
 		Card card2 = new Card(1, 1);
 		Card card3 = new Card(2, 1);
 		Card card4 = new Card(3, 1);
-		Card card5 = new Card(4, 1);
+		//Card card5 = new Card(4, 1);
 		ArrayList<Card> testPublicCards = new ArrayList<Card>();
 		testPublicCards.add(card1);
 		testPublicCards.add(card2);
 		testPublicCards.add(card3);
 		testPublicCards.add(card4);
-		testPublicCards.add(card5);
+		//testPublicCards.add(card5);
 
 		this.updatePublicCards(testPublicCards);
 		
@@ -125,7 +127,7 @@ public class TexasPokerUIController implements UIController {
 		panelPubCard.setLayout(new FlowLayout());
 		centerPanel.add(panelPubCard);
 
-		panelPlayerLog.add(playerLog);
+		panelPlayerLog.add(playerLogLabel);
 		centerPanel.add(panelPlayerLog);
 		frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
 
@@ -146,7 +148,7 @@ public class TexasPokerUIController implements UIController {
 	@Override
 	public void update(final String s) {
 		// TODO Auto-generated method stub
-		playerLog.setText(s);
+		
 
 	}
 
@@ -175,6 +177,12 @@ public class TexasPokerUIController implements UIController {
 
 		panelPubCard.validate();
 		panelPubCard.revalidate();
+
+	}
+	public void updatePlayerlog(String playerLog) {
+		playerLogLabel.setText(playerLog);
+		playerLogLabel.validate();
+		playerLogLabel.revalidate();
 
 	}
 	

@@ -23,7 +23,8 @@ public class JPlayerMyselfPanel extends JPanel {
 	public JPanel leftPanel = new JPanel();
 	public JPanel middlePanel = new JPanel();
 	public JPanel rightPanel = new JPanel();
-	public JLabel[][] privateCardLabels = new JLabel[5][];
+	//public JLabel[][] privateCardLabels = new JLabel[5][];
+	public JLabel[][] privateCardLabels = new JLabel[4][];
 	
 	
 	
@@ -32,7 +33,8 @@ public class JPlayerMyselfPanel extends JPanel {
 	public JPlayerMyselfPanel() {
 		// TODO Auto-generated constructor stub
 		for (int suit = 0; suit < privateCardLabels.length; ++ suit){
-			int numberOfCardsInThisSuit = suit < 4 ? 13 : 2;
+			//int numberOfCardsInThisSuit = suit < 4 ? 13 : 2;
+			int numberOfCardsInThisSuit = 13;
 			privateCardLabels[suit] = new JLabel[numberOfCardsInThisSuit];
 			for (int face = 1; face <= numberOfCardsInThisSuit; ++ face){
 				ImageIcon iconOrigin = new ImageIcon(
@@ -57,7 +59,7 @@ public class JPlayerMyselfPanel extends JPanel {
 		}
 	    
 		
-		Dimension cardPanelDim = new Dimension(300, 200);
+		Dimension cardPanelDim = new Dimension(300, 150);
 		cardPanel.setSize(cardPanelDim);
 		cardPanel.setMaximumSize(cardPanelDim);
 		cardPanel.setMinimumSize(cardPanelDim);
@@ -114,13 +116,13 @@ public class JPlayerMyselfPanel extends JPanel {
 		Card card2 = new Card(1, 1);
 		Card card3 = new Card(2, 1);
 		Card card4 = new Card(3, 1);
-		Card card5 = new Card(4, 1);
+		//Card card5 = new Card(4, 1);
 		ArrayList<Card> testPublicCards = new ArrayList<Card>();
 		testPublicCards.add(card1);
 		testPublicCards.add(card2);
 		testPublicCards.add(card3);
 		testPublicCards.add(card4);
-		testPublicCards.add(card5);
+		//testPublicCards.add(card5);
 
 		this.updatePrivateCards(testPublicCards);
 		
