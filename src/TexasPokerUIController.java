@@ -30,59 +30,10 @@ public class TexasPokerUIController implements UIController {
 	public ArrayList<JLabel> pubCards  = new ArrayList<JLabel>();
 	public JLabel playerLog = new JLabel("日志");
 	public JPanel southPanel = new JPanel();
+	public ImageIcon[][] cardImages = new ImageIcon[4][13];
+	public ArrayList<JLabel> cardLabels = new ArrayList<JLabel>();
 	
-	ImageIcon clubs1 = new ImageIcon("./image/clubs1.png");
-	ImageIcon clubs2 = new ImageIcon("./image/clubs2.png");
-	ImageIcon clubs3 = new ImageIcon("./image/clubs3.png");
-	ImageIcon clubs4 = new ImageIcon("./image/clubs4.png");
-	ImageIcon clubs5 = new ImageIcon("./image/clubs5.png");
-	ImageIcon clubs6 = new ImageIcon("./image/clubs6.png");
-	ImageIcon clubs7 = new ImageIcon("./image/clubs7.png");
-	ImageIcon clubs8 = new ImageIcon("./image/clubs8.png");
-	ImageIcon clubs9 = new ImageIcon("./image/clubs9.png");
-	ImageIcon clubs10 = new ImageIcon("./image/clubs10.png");
-	ImageIcon clubs11 = new ImageIcon("./image/clubs11.png");
-	ImageIcon clubs12 = new ImageIcon("./image/clubs12.png");
-	ImageIcon clubs13 = new ImageIcon("./image/clubs13.png");
-	ImageIcon diamonds1 = new ImageIcon("./image/diamonds1.png");
-	ImageIcon diamonds2 = new ImageIcon("./image/diamonds2.png");
-	ImageIcon diamonds3 = new ImageIcon("./image/diamonds3.png");
-	ImageIcon diamonds4 = new ImageIcon("./image/diamonds4.png");
-	ImageIcon diamonds5 = new ImageIcon("./image/diamonds5.png");
-	ImageIcon diamonds6 = new ImageIcon("./image/diamonds6.png");
-	ImageIcon diamonds7 = new ImageIcon("./image/diamonds7.png");
-	ImageIcon diamonds8 = new ImageIcon("./image/diamonds8.png");
-	ImageIcon diamonds9 = new ImageIcon("./image/diamonds9.png");
-	ImageIcon diamonds10 = new ImageIcon("./image/diamonds10.png");
-	ImageIcon diamonds11 = new ImageIcon("./image/diamonds11.png");
-	ImageIcon diamonds12 = new ImageIcon("./image/diamonds12.png");
-	ImageIcon diamonds13 = new ImageIcon("./image/diamonds13.png");
-	ImageIcon spades1 = new ImageIcon("./image/spades1.png");
-	ImageIcon spades2 = new ImageIcon("./image/spades2.png");
-	ImageIcon spades3 = new ImageIcon("./image/spades3.png");
-	ImageIcon spades4 = new ImageIcon("./image/spades4.png");
-	ImageIcon spades5 = new ImageIcon("./image/spades5.png");
-	ImageIcon spades6 = new ImageIcon("./image/spades6.png");
-	ImageIcon spades7 = new ImageIcon("./image/spades7.png");
-	ImageIcon spades8 = new ImageIcon("./image/spades8.png");
-	ImageIcon spades9 = new ImageIcon("./image/spades9.png");
-	ImageIcon spades10 = new ImageIcon("./image/spades10.png");
-	ImageIcon spades11 = new ImageIcon("./image/spades11.png");
-	ImageIcon spades12 = new ImageIcon("./image/spades12.png");
-	ImageIcon spades13 = new ImageIcon("./image/spades13.png");
-	ImageIcon hearts1 = new ImageIcon("./image/hearts1.png");
-	ImageIcon hearts2 = new ImageIcon("./image/hearts2.png");
-	ImageIcon hearts3 = new ImageIcon("./image/hearts3.png");
-	ImageIcon hearts4 = new ImageIcon("./image/hearts4.png");
-	ImageIcon hearts5 = new ImageIcon("./image/hearts5.png");
-	ImageIcon hearts6 = new ImageIcon("./image/hearts6.png");
-	ImageIcon hearts7 = new ImageIcon("./image/hearts7.png");
-	ImageIcon hearts8 = new ImageIcon("./image/hearts8.png");
-	ImageIcon hearts9 = new ImageIcon("./image/hearts9.png");
-	ImageIcon hearts10 = new ImageIcon("./image/hearts10.png");
-	ImageIcon hearts11 = new ImageIcon("./image/hearts11.png");
-	ImageIcon hearts12 = new ImageIcon("./image/hearts12.png");
-	ImageIcon hearts13 = new ImageIcon("./image/hearts13.png");
+	
 	
 	
 	
@@ -196,7 +147,7 @@ public class TexasPokerUIController implements UIController {
 		
 	}
 	
-	public void addPublicCard(Card card) {
+	public void addPublicCard1(Card card) {
 		// card找对应图片
 		// 用对应的图片构造JLabel
 		//将构造的JLabel加到pubCards ArrayList
@@ -206,26 +157,20 @@ public class TexasPokerUIController implements UIController {
 		
 		
 		// card找对应图片
-		ImageIcon card1 =;
-		ImageIcon card2 =;
-		ImageIcon card3 =;
-		JLabel cradLabel1 = new JLabel();
-		JLabel cradLabel2 = new JLabel();
-		JLabel cradLabel3 = new JLabel();
-		cradLabel1.setIcon(card1);
-		cradLabel2.setIcon(card2);
-		cradLabel3.setIcon(card3);
-		pubCards.add(cradLabel1);
-		pubCards.add(cradLabel2);
-		pubCards.add(cradLabel3);
-		panelPubCard.setLayout(new FlowLayout());
-		panelPubCard.add(pubCards.get(0));
-		panelPubCard.add(pubCards.get(1));
-		panelPubCard.add(pubCards.get(2));
-		//panelPubCard.removeAll
-		for(int i = 0; i< pubCards.size(); i++) {
-			pubCards.remove(i);
+		
+		
+		for(int i = 0; i < 4; i++){
+			 for(int j = 1; i <= 13; j++){
+			  cardImages[i][j-1] = new ImageIcon("./image/card_" + String.valueOf(i) + "_" + String.valueOf(j) + ".png");
+			}
 		}
+		
+		ImageIcon image = cardImages[card.suit][card.face-1];
+		JLabel label = new JLabel();
+		label.setIcon(image);
+		pubCards.add(label);
+		panelPubCard.removeAll();
+		
 		
 		//panelPubCard 添加所有ArrayList里的JLabel
 		
@@ -234,6 +179,30 @@ public class TexasPokerUIController implements UIController {
 		}
 		
 		//panelPubCard.validate()
+		panelPubCard.validate();
+		
+	}
+	
+	public void addPublicCard2(ArrayList<Card> publicCards) {
+		for(int i = 0; i < 4; i++){
+			 for(int j = 1; i <= 13; j++){
+			  cardImages[i][j-1] = new ImageIcon("./image/card_" + String.valueOf(i) + "_" + String.valueOf(j) + ".png");
+			}
+		}
+		
+		panelPubCard.removeAll();
+
+		 for (int i = 0; i < publicCards.size(); ++ i){
+		  //ImageIcon image = cardImages[card.suit][card.face-1];
+		  //JLabel label = new JLabel();  
+		 //label.setIcon(image);
+		  //panelPubCard.add(label);
+			 panelPubCard.add(cardLabels[card.suit][card.face-1]);
+		 }
+		panelPubCard.validate();
+
+		
+		
 		
 	}
 	

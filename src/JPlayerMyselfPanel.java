@@ -20,6 +20,7 @@ public class JPlayerMyselfPanel extends JPanel {
 	public JPanel leftPanel = new JPanel();
 	public JPanel middlePanel = new JPanel();
 	public JPanel rightPanel = new JPanel();
+	public ImageIcon[][] cardImages = new ImageIcon[4][13];
 	
 
 	public JPlayerMyselfPanel() {
@@ -97,20 +98,29 @@ public class JPlayerMyselfPanel extends JPanel {
 	}
 	
 	public void addPrevateCard(Card card) {
-		ImageIcon card1 =;
-		ImageIcon card2 =;
-		card1.setImage(card1.getImage().getScaledInstance(45,50 ,Image.SCALE_DEFAULT ));
-		card2.setImage(card2.getImage().getScaledInstance(45,50 ,Image.SCALE_DEFAULT ));
-		JLabel cradLabel1 = new JLabel();
-		JLabel cradLabel2 = new JLabel();
-		cradLabel1.setIcon(card1);
-		cradLabel2.setIcon(card2);
-		preCards.add(cradLabel1);
-		preCards.add(cradLabel2);
+		
+		for(int i = 0; i < 4; i++){
+			 for(int j = 1; i <= 13; j++){
+			  cardImages[i][j-1] = new ImageIcon("./image/card_" + String.valueOf(i) + "_" + String.valueOf(j) + ".png");
+			}
+		}
+		
+		ImageIcon image = cardImages[card.suit][card.face-1];
+		JLabel label = new JLabel();
+		label.setIcon(image);
+		preCards.add(label);
+		panelPreCard.removeAll();
+		
+		
+		//panelPubCard 添加所有ArrayList里的JLabel
+		
 		for(int i = 0; i< preCards.size(); i++) {
 			panelPreCard.add(preCards.get(i));
 		}
 		
-	}
+		//panelPubCard.validate()
+		panelPreCard.validate();
+		
 
+}
 }
