@@ -1,3 +1,4 @@
+import java.net.InetAddress;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -15,11 +16,16 @@ public class TexasGameGUI extends UnicastRemoteObject implements ITexasGameGUI {
         this.ui = ui;
         try{  
 			//rmi 连接server
-			String server_path = "//localhost:12200/Server";
+            //String server_path = "//localhost:12200/Server";
+            String pub_ip = "101.201.197.43";
+            String server_path = "rmi://"+pub_ip+":12200/Server";
+            
             this.server  = (IServer)Naming.lookup(server_path);
 
 			//rmi 连接hallController
-			String texasGameController_path = "//localhost:12200/TexasGameController";
+            //String texasGameController_path = "//localhost:12200/TexasGameController";
+            String texasGameController_path = "rmi://"+pub_ip+":12200/TexasGameController";
+            
 			this.texasGameController = (ITexasGameController)Naming.lookup(texasGameController_path);
 			System.out.println("已连接服务器rmi");
 		} catch(Exception es) {
@@ -28,6 +34,16 @@ public class TexasGameGUI extends UnicastRemoteObject implements ITexasGameGUI {
 		
 		try {
             
+            InetAddress addr = null;  //自己也是服务器
+            String ip_addr = "";
+            try {
+                addr = InetAddress.getLocalHost();
+                ip_addr = addr.getHostAddress();
+                System.out.println("客户端的IP地址是:"+ ip_addr);
+            }catch(Exception ukhe){
+                ukhe.printStackTrace();
+            }
+            System.setProperty("java.rmi.server.hostname", ip_addr);
 			//LocateRegistry.createRegistry(12211);
 			String rmi_address = "//localhost:12211/TexasGameGUI";
 			Naming.bind(rmi_address, this);

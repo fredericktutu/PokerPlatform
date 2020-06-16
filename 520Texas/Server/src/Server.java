@@ -7,9 +7,13 @@ import java.text.SimpleDateFormat;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.net.InetAddress;
 import java.rmi.Naming;
+import java.rmi.RMISecurityManager;
+import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
+import java.rmi.UnknownHostException;
 
 public class Server extends UnicastRemoteObject implements IServer{
     HallHelper hallHelper;
@@ -269,22 +273,58 @@ public class Server extends UnicastRemoteObject implements IServer{
         
     }
 
-    public void rmi_open() {
+    public void rmi_open(){
         try{
             //hallController rmi
-            this.hallController = new HallController(this, this.hallHelper);
+
+            
+            String local_ip = "localhost";
+            String reg_port = "12200";
+            String data_port = "12250";
+            /*
+            try {
+                local_ip = InetAddress.getLocalHost().getHostAddress();
+                System.out.println("服务器的私有IP地址是:"+ local_ip);
+            }catch(Exception ukhe){
+                ukhe.printStackTrace();
+            }
+            */
+            
+            /*
+            if (null == System.getSecurityManager()) {
+                System.setSecurityManager(new RMISecurityManager());
+            }
+            */
+            System.out.println("java.rmi.server.hostname"+System.getProperty("java.rmi.server.hostname"));
+            System.out.println("java.rmi.server.codebase"+System.getProperty("java.rmi.server.codebase"));
+            System.out.println("java.rmi.server.useLocalHostname：" + System.getProperty("java.rmi.server.useLocalHostname"));
+            System.setProperty("java.rmi.server.useLocalHostname", "true");
+            System.setProperty("java.rmi.server.hostname", "101.201.197.43");
+            
+            
+
+            //RMISocketFactory.setSocketFactory(new TexasSocket()); //定义数据传输端口 12250
+            LocateRegistry.createRegistry(Integer.parseInt(reg_port));  //RMI注册端口 12200
+            //if(ip_addr == "") {
+            //    System.out.println("no ip addr");
+            //    System.exit(0);
+            //}
+            
+            this.hallController = new HallController(this, this.hallHelper); //实现接口示例
             this.hallHelper.controller = hallController;
             this.texasPlayerController = new TexasPlayerController();
             this.texasPlayerController.server =this;
             this.hallHelper.playerController = this.texasPlayerController;
-            
-            //server rmi
-            
-            LocateRegistry.createRegistry(12200);
-            //System.setProperty("java.rmi.server.hostname", "47.100.138.184");
-            Naming.bind("//localhost:12200" + "/HallController", hallController);
-            Naming.bind("//localhost:12200" + "/TexasGameController", texasPlayerController);
-            Naming.bind("//localhost:12200"+ "/Server", this);
+
+            Naming.rebind("rmi://"+ local_ip + ":" + reg_port + "/HallController", hallController);  //绑定
+            Naming.rebind("rmi://"+ local_ip + ":" + reg_port  + "/TexasGameController", texasPlayerController);
+            Naming.rebind("rmi://"+ local_ip + ":" + reg_port + "/Server", this);
+            /*
+            String[] sl = Naming.list("rmi://192.168.50.86:12200");
+            for(int i=0;i<sl.length;i++) {
+                System.out.println(sl[i]);
+            }
+            */
             System.out.println("RMI is opened");
         } catch(Exception e) {
             e.printStackTrace();

@@ -287,7 +287,7 @@ public class TexasAIController{
       Card card2 = msg.private_cards.get(1);
 
       System.out.println("into strategy, round" + msg.round);
-      int remain_bet=msg.playerMoney[msg.playerIndex]-msg.bets.get(msg.playerIndex);
+      int remain_bet=msg.playerMoney[msg.playerIndex];
       int num_player = msg.status.size();
 
       // consider position first
@@ -300,7 +300,11 @@ public class TexasAIController{
           {
             if(msg.add)
             {
-              handler_add_bet((int)(msg.followTo+limit)/2);
+              handler_add_bet(Math.max(msg.addMin,Math.min((int)((msg.followTo+limit)/2)/100*100,msg.addMax)));
+            }
+            else
+            {
+              default_action(msg);
             }
 
           }
@@ -315,12 +319,17 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
+
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -330,6 +339,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -340,7 +353,11 @@ public class TexasAIController{
           {
             if(msg.add)
             {
-              handler_add_bet((int)(msg.followTo+limit)/2);
+              handler_add_bet(Math.max(msg.addMin,Math.min((int)((msg.followTo+limit)/2)/100*100,msg.addMax)));
+            }
+            else
+            {
+              default_action(msg);
             }
 
           }
@@ -355,12 +372,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -370,6 +391,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -383,6 +408,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -396,12 +425,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -411,6 +444,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -423,6 +460,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -436,12 +477,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -451,6 +496,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -466,6 +515,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -479,12 +532,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -494,6 +551,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -506,6 +567,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -519,12 +584,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -534,6 +603,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
 
@@ -548,6 +621,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -561,12 +638,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -576,6 +657,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -588,6 +673,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -601,12 +690,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -616,6 +709,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -628,6 +725,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -641,12 +742,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -656,6 +761,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -668,7 +777,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
-
+            else
+            {
+              default_action(msg);
+            }
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
           {
@@ -681,12 +793,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -696,6 +812,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -711,6 +831,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -724,12 +848,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -739,6 +867,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -751,6 +883,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -764,12 +900,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -779,6 +919,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -792,7 +936,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
-
+            else
+            {
+              default_action(msg);
+            }
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
           {
@@ -805,12 +952,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -820,6 +971,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -832,7 +987,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
-
+            else
+            {
+              default_action(msg);
+            }
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
           {
@@ -845,12 +1003,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -860,6 +1022,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -872,6 +1038,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -885,12 +1055,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -900,6 +1074,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -912,7 +1090,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
-
+            else
+            {
+              default_action(msg);
+            }
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
           {
@@ -925,12 +1106,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -940,6 +1125,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }
@@ -952,6 +1141,10 @@ public class TexasAIController{
             {
               handler_add_bet((int)(msg.followTo+limit)/2);
             }
+            else
+            {
+              default_action(msg);
+            }
 
           }
           else if(msg.followTo>=limit-10&&remain_bet>msg.followTo) // has enough money but reaches limit
@@ -965,12 +1158,16 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.followTo);
             }
-            else
+            else if(msg.abort)
             {
               handler_abort_bet();
             }
+            else
+            {
+              default_action(msg);
+            }
           }
-          else if(msg.followTo>remain_bet||remain_bet<limit) // has no enough money
+          else if(msg.followTo>=remain_bet||remain_bet<limit) // has no enough money
           {
             if(msg.abort)
             {
@@ -980,6 +1177,10 @@ public class TexasAIController{
             {
               handler_follow_bet(msg.addMin);
               //handler_add_bet(msg.addMin);
+            }
+            else
+            {
+              default_action(msg);
             }
           }
         }

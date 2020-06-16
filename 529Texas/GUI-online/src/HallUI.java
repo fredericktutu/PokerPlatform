@@ -345,7 +345,7 @@ class HallUI extends JFrame {
 				public void run() {
 					try {
 						HallUI.this.inGame = true;
-						HallUI.this.texasWindow = new TexasPokerFrame(token,HallUI.this);
+						HallUI.this.texasWindow = new TexasPokerFrame(token,HallUI.this, roomId);
 						HallUI.this.setVisible(false);
 						texasWindow.frame.setVisible(true);
 						

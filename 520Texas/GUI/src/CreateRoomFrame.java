@@ -52,16 +52,20 @@ public class CreateRoomFrame extends JFrame implements MouseListener {
 	JLabel submit, ma;// 背景
 	String[] games, difficulty, modes, session, Num;
 	JComboBox roomType, gameLevel, mode, tableSize;
+	JLabel numLabel = new JLabel("人数:");
+	JLabel typeLabel = new JLabel("类型:");
+	JLabel modeLabel = new JLabel("模式:");
+	JLabel sessionLabel = new JLabel("难度:");
 
 	public CreateRoomFrame(String token, IHallController hallController) {
 		System.out.println("创建房间界面");
 		this.token = token;
 		this.hallController = hallController;
 //实例化
-		bacgrangd = new JLabel(new ImageIcon("素材//timg.gif"));
+		bacgrangd = new JLabel(new ImageIcon("素材//timg.jpeg"));
 		small_mig = new JLabel(new ImageIcon("素材//最小化.png"));
 		close_img = new JLabel(new ImageIcon("素材//关闭.png"));
-		poker_img = new JLabel(new ImageIcon("素材//poker.jpg"));
+		//poker_img = new JLabel(new ImageIcon("素材//poker.jpg"));
 		Title_img = new JLabel("创建");
 		small_btn = new JLabel();
 		close_btn = new JLabel();// 暗调
@@ -102,23 +106,23 @@ public class CreateRoomFrame extends JFrame implements MouseListener {
 		bacgrangd.setBounds(-29, -123, 500, 250);
 		small_mig.setBounds(364, 2, 32, 32);
 		close_img.setBounds(396, 3, 32, 32);
-		poker_img.setBounds(10, 10, 45, 32);
-		Title_img.setBounds(50, 5, 71, 47);
+		//poker_img.setBounds(10, 10, 45, 32);
+		Title_img.setBounds(10, 5, 71, 47);
 		small_btn.setBounds(361, 0, 35, 35);
 		close_btn.setBounds(395, 0, 35, 35);
 		//tu.setBounds(170, 80, 90, 85);
 		//roomID.setBounds(130, 120, 180, 40);
-		tableSize.setBounds(100, 160, 180, 40);
-		pass.setBounds(130, 200, 180, 40);
-		roomType.setBounds(100, 240, 180, 40);
-		gameLevel.setBounds(100, 320, 180, 40);
-		mode.setBounds(100, 280, 180, 40);
+		tableSize.setBounds(160, 160, 180, 40);
+		pass.setBounds(130, 320, 180, 40);
+		roomType.setBounds(160, 200, 180, 40);
+		gameLevel.setBounds(160, 280, 180, 40);
+		mode.setBounds(160, 240, 180, 40);
 		//name_img.setBounds(100, 170, 20, 20);
 		//account_img.setBounds(100, 130, 20, 20);
-		password_img.setBounds(100, 210, 20, 20);
+		password_img.setBounds(100, 330, 20, 20);
 		//lie1.setBounds(100, 190, 240, 10);
 		//lie3.setBounds(100, 150, 240, 10);
-		lie2.setBounds(100, 230, 240, 10);
+		lie2.setBounds(100, 350, 240, 10);
 		bgcolor.setBounds(0, 125, 500, 300);
 		//ku1.setBounds(100, 250, 20, 20);
 		//ku2.setBounds(190, 250, 20, 20);
@@ -128,8 +132,12 @@ public class CreateRoomFrame extends JFrame implements MouseListener {
 		//Remember_pwd.setBounds(215, 250, 80, 20);
 		//find_pwd.setBounds(288, 250, 80, 20);
 		//sign_up.setBounds(15, 300, 80, 20);
-		create.setBounds(206, 365, 80, 20);
-		submit.setBounds(100, 360, 242, 35);
+		create.setBounds(206, 375, 80, 20);
+		submit.setBounds(100, 370, 242, 35);
+		numLabel.setBounds(100, 160, 60, 40);
+		typeLabel.setBounds(100, 200, 60, 40);
+		modeLabel.setBounds(100, 240, 60, 40);
+		sessionLabel.setBounds(100, 280, 60, 40);
 //属性
 		Title_img.setFont(new Font("微软雅黑", 1, 25));
 		Title_img.setForeground(Color.white);
@@ -148,7 +156,10 @@ public class CreateRoomFrame extends JFrame implements MouseListener {
 		//tableSize.setOpaque(false);// 透明背景
 		//tableSize.setBorder(null);// 去掉边框
 		//tableSize.setFont(new Font("微软雅黑", Font.PLAIN, 16));// 框内文字样式
-		
+		numLabel.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+		typeLabel.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+		modeLabel.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+		sessionLabel.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		
 		pass.setFont(new Font("微软雅黑", Font.PLAIN, 16));// 框内文字样式
 		pass.setBorder(null);// 去掉边框
@@ -282,7 +293,7 @@ public class CreateRoomFrame extends JFrame implements MouseListener {
 		getContentPane().add(small_mig);
 		getContentPane().add(close_img);
 		getContentPane().add(Title_img);
-		getContentPane().add(poker_img);
+		//getContentPane().add(poker_img);
 		getContentPane().add(small_btn);
 		getContentPane().add(close_btn);
 		//getContentPane().add(tu);
@@ -291,13 +302,17 @@ public class CreateRoomFrame extends JFrame implements MouseListener {
 		//getContentPane().add(lie3);
 		//getContentPane().add(roomID);
 		getContentPane().add(tableSize);
+		getContentPane().add(numLabel);
 		getContentPane().add(pass);
 		//getContentPane().add(account_img);
 		//getContentPane().add(name_img);
 		getContentPane().add(password_img);
 		getContentPane().add(roomType);
-		getContentPane().add(gameLevel);
+		getContentPane().add(typeLabel);
 		getContentPane().add(mode);
+		getContentPane().add(modeLabel);
+		getContentPane().add(gameLevel);
+		getContentPane().add(sessionLabel);
 		//getContentPane().add(gou1);
 		//getContentPane().add(gou2);
 		//getContentPane().add(ku1);
@@ -312,7 +327,7 @@ public class CreateRoomFrame extends JFrame implements MouseListener {
 		getContentPane().add(bacgrangd);
 				
 		//this.setLayout(new BorderLayout());
-		this.setSize(430, 450);
+		this.setSize(430, 425);
 		this.setIconImage(Toolkit.getDefaultToolkit().createImage("素材\\透明照片.png"));// 窗体图标
 		this.setLocationRelativeTo(null);// 保持居中
 		this.setUndecorated(true);// 去顶部

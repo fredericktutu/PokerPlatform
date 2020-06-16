@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
@@ -42,10 +43,10 @@ public class RegisterUI extends JFrame implements MouseListener {
 	public RegisterUI() {
 
 //实例化
-		bacgrangd = new JLabel(new ImageIcon("素材//timg.gif"));
+		bacgrangd = new JLabel(new ImageIcon("素材//timg.jpeg"));
 		small_mig = new JLabel(new ImageIcon("素材//最小化.png"));
 		close_img = new JLabel(new ImageIcon("素材//关闭.png"));
-		poker_img = new JLabel(new ImageIcon("素材//poker.jpg"));
+		//poker_img = new JLabel(new ImageIcon("素材//poker.jpg"));
 		Title_img = new JLabel("注册");
 		small_btn = new JLabel();
 		close_btn = new JLabel();// 暗调
@@ -53,8 +54,16 @@ public class RegisterUI extends JFrame implements MouseListener {
 		user = new JTextField();
 		user_name = new JTextField();
 		pass = new JPasswordField();
-		account_img = new JLabel(new ImageIcon("素材//poker.jpg"));
-		name_img = new JLabel(new ImageIcon("素材//poker.jpg"));
+		ImageIcon iconOrigin = new ImageIcon("素材//账户1.png");
+		Image image = iconOrigin.getImage();
+		Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon icon = new ImageIcon(newImage);
+		account_img = new JLabel(icon);
+		ImageIcon iconOrigin1 = new ImageIcon("素材//昵称1.png");
+		Image image1 = iconOrigin1.getImage();
+		Image newImage1 = image1.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon icon1 = new ImageIcon(newImage1);
+		name_img = new JLabel(icon1);
 		password_img = new JLabel(new ImageIcon("素材//密码.png"));
 		lie1 = new JLabel(new ImageIcon("素材//直线2.png"));
 		lie2 = new JLabel(new ImageIcon("素材//直线2.png"));
@@ -75,8 +84,8 @@ public class RegisterUI extends JFrame implements MouseListener {
 		bacgrangd.setBounds(-29, -123, 500, 250);
 		small_mig.setBounds(364, 2, 32, 32);
 		close_img.setBounds(396, 3, 32, 32);
-		poker_img.setBounds(10, 10, 45, 32);
-		Title_img.setBounds(50, 5, 71, 47);
+		//poker_img.setBounds(10, 10, 45, 32);
+		Title_img.setBounds(10, 5, 71, 47);
 		small_btn.setBounds(361, 0, 35, 35);
 		close_btn.setBounds(395, 0, 35, 35);
 		//tu.setBounds(170, 80, 90, 85);
@@ -187,7 +196,10 @@ public class RegisterUI extends JFrame implements MouseListener {
 		user.addFocusListener(new FocusListener() {
 
 			public void focusLost(FocusEvent e) {// 失去焦点
-				account_img.setIcon(new javax.swing.ImageIcon("素材//qq (1).png"));
+				ImageIcon iconOrigin = new ImageIcon("素材//账户1.png");
+				Image image = iconOrigin.getImage();
+				Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+				account_img.setIcon(new javax.swing.ImageIcon(newImage));
 				lie3.setIcon(new javax.swing.ImageIcon("素材//直线2.png"));
 				c = 0;
 				if (user.getText().isEmpty()) {// 判断是否为空（为了设置默认提示语）
@@ -202,7 +214,10 @@ public class RegisterUI extends JFrame implements MouseListener {
 				a = 1;
 				c = 1;
 				b = 0;
-				account_img.setIcon(new javax.swing.ImageIcon("素材//qq (2).png"));
+				ImageIcon iconOrigin = new ImageIcon("素材//账户.png");
+				Image image = iconOrigin.getImage();
+				Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+				account_img.setIcon(new javax.swing.ImageIcon(newImage));
 				if (user.getText().equals("账户")) {
 					user.setText("");
 				} else {
@@ -215,7 +230,10 @@ public class RegisterUI extends JFrame implements MouseListener {
 		user_name.addFocusListener(new FocusListener() {
 
 			public void focusLost(FocusEvent e) {// 失去焦点
-				name_img.setIcon(new javax.swing.ImageIcon("素材//qq (1).png"));
+				ImageIcon iconOrigin = new ImageIcon("素材//昵称1.png");
+				Image image = iconOrigin.getImage();
+				Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+				name_img.setIcon(new javax.swing.ImageIcon(newImage));
 				lie1.setIcon(new javax.swing.ImageIcon("素材//直线2.png"));
 				c = 0;
 				if (user_name.getText().isEmpty()) {// 判断是否为空（为了设置默认提示语）
@@ -230,7 +248,10 @@ public class RegisterUI extends JFrame implements MouseListener {
 				a = 1;
 				c = 1;
 				b = 0;
-				name_img.setIcon(new javax.swing.ImageIcon("素材//qq (2).png"));
+				ImageIcon iconOrigin = new ImageIcon("素材//昵称.png");
+				Image image = iconOrigin.getImage();
+				Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+				name_img.setIcon(new javax.swing.ImageIcon(newImage));
 				if (user_name.getText().equals("昵称")) {
 					user_name.setText("");
 				} else {
@@ -274,7 +295,7 @@ public class RegisterUI extends JFrame implements MouseListener {
 		getContentPane().add(small_mig);
 		getContentPane().add(close_img);
 		getContentPane().add(Title_img);
-		getContentPane().add(poker_img);
+		//getContentPane().add(poker_img);
 		getContentPane().add(small_btn);
 		getContentPane().add(close_btn);
 		//getContentPane().add(tu);
@@ -331,8 +352,10 @@ public class RegisterUI extends JFrame implements MouseListener {
 			String users = user.getText();
 			String password = new String(pass.getPassword());
 			boolean succeedToRegister = false;
+			String pub_ip = "101.201.197.43";
 			try{
-				String path = "//localhost:12200/Server";
+				//String path = "//localhost:12200/Server";
+				String path = "rmi://"+pub_ip+":12200/Server";
 				IServer s  = (IServer)Naming.lookup(path);
 				succeedToRegister = s.service_register(users, names, password);
 			} catch(Exception ee) {
@@ -394,11 +417,11 @@ public class RegisterUI extends JFrame implements MouseListener {
 			close_btn.setOpaque(false);
 		} else if (e.getSource() == user_name) {
 			if (a == 0) {
-				lie3.setIcon(new javax.swing.ImageIcon("素材//直线2.png"));
+				lie1.setIcon(new javax.swing.ImageIcon("素材//直线2.png"));
 			}
 		} else if (e.getSource() == user) {
 			if (a == 0) {
-				lie1.setIcon(new javax.swing.ImageIcon("素材//直线2.png"));
+				lie3.setIcon(new javax.swing.ImageIcon("素材//直线2.png"));
 			}
 		}else if (e.getSource() == pass) {
 			if (b == 0) {

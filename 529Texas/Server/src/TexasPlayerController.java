@@ -18,7 +18,7 @@ public class TexasPlayerController{
         helper.action_add_bet(player, addTo);
     }
     //¸ú×¢
-    public void handler_follow_bet(String token, int followTo) {  
+    public void handler_follow_bet(String token, int followTo) {
         Player player = server.decipher(token);
         helper = player.texasGameHelper;
         helper.action_follow_bet(player, followTo);

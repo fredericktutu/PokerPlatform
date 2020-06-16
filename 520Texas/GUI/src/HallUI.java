@@ -270,6 +270,7 @@ class HallUI extends JFrame {
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				JOptionPane.showMessageDialog(null, s);
+				
 			}
 		});
 	}
@@ -282,7 +283,9 @@ class HallUI extends JFrame {
 					try {
 						HallUI.this.inGame = true;
 						HallUI.this.texasWindow = new TexasPokerFrame(token, gui.hallController, HallUI.this);
+						HallUI.this.setVisible(false);
 						texasWindow.frame.setVisible(true);
+						
 					} catch (final Exception e) {
 						e.printStackTrace();
 					}
@@ -342,8 +345,10 @@ class HallUI extends JFrame {
 	}
 
 	public void backFromGame() {
+		
 		this.inGame = false;
 		this.texasWindow = null;
+		this.setVisible(true);
 	}
 	
 

@@ -96,7 +96,7 @@ public class ResultFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					final TexasPokerFrame window = new TexasPokerFrame(token,  null);
+					final TexasPokerFrame window = new TexasPokerFrame(token,  null, "");
 					window.frame.setVisible(true);
 				} catch (final Exception ev) {
 					ev.printStackTrace();

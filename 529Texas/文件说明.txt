@@ -1,0 +1,5 @@
+Server文件夹下为服务器代码
+GUI-online文件夹下为客户端代码
+JAR文件夹下为可执行程序
+
+关于本项目后续的更新，请访问www.github.com/fredericktutu/PokerPlatform/

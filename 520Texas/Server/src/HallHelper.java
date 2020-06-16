@@ -133,8 +133,8 @@ public class HallHelper {
 
         HallEvent m = new HallEvent();
         m.whatHappen = 4;
-        //m.activeRoomInfos = this.hall.allRoomInfo();
-        m.activeRoomInfos = get_test_info();  //care:因为测试环境没有现成的房间，我自己创建了一个房间列表
+        m.activeRoomInfos = this.hall.allRoomInfo();
+        //m.activeRoomInfos = get_test_info();  //care:因为测试环境没有现成的房间，我自己创建了一个房间列表
         m.curRoomInfo = null;
         m.failMsg = "";
         this.controller.update(player, m);

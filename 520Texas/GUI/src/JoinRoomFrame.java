@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,17 +49,21 @@ public class JoinRoomFrame extends JFrame implements MouseListener {
 		this.token = token;
 		this.hallController = hallController;
 //实例化
-		bacgrangd = new JLabel(new ImageIcon("素材//timg.gif"));
+		bacgrangd = new JLabel(new ImageIcon("素材//timg.jpeg"));
 		small_mig = new JLabel(new ImageIcon("素材//最小化.png"));
 		close_img = new JLabel(new ImageIcon("素材//关闭.png"));
-		poker_img = new JLabel(new ImageIcon("素材//poker.jpg"));
+		//poker_img = new JLabel(new ImageIcon("素材//poker.jpg"));
 		Title_img = new JLabel("加入");
 		small_btn = new JLabel();
 		close_btn = new JLabel();// 暗调
 		//tu = new JLabel(new ImageIcon("素材//头像.png"));
 		roomID = new JTextField();
 		pass = new JPasswordField();
-		account_img = new JLabel(new ImageIcon("素材//poker.jpg"));
+		ImageIcon iconOrigin = new ImageIcon("素材//房间1.png");
+		Image image = iconOrigin.getImage();
+		Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon icon = new ImageIcon(newImage);
+		account_img = new JLabel(icon);
 		password_img = new JLabel(new ImageIcon("素材//密码.png"));
 		lie1 = new JLabel(new ImageIcon("素材//直线2.png"));
 		lie2 = new JLabel(new ImageIcon("素材//直线2.png"));
@@ -78,8 +83,8 @@ public class JoinRoomFrame extends JFrame implements MouseListener {
 		bacgrangd.setBounds(-29, -123, 500, 250);
 		small_mig.setBounds(364, 2, 32, 32);
 		close_img.setBounds(396, 3, 32, 32);
-		poker_img.setBounds(10, 10, 45, 32);
-		Title_img.setBounds(50, 5, 71, 47);
+		//poker_img.setBounds(10, 10, 45, 32);
+		Title_img.setBounds(10, 5, 71, 47);
 		small_btn.setBounds(361, 0, 35, 35);
 		close_btn.setBounds(395, 0, 35, 35);
 		//tu.setBounds(170, 80, 90, 85);
@@ -172,7 +177,10 @@ public class JoinRoomFrame extends JFrame implements MouseListener {
 		roomID.addFocusListener(new FocusListener() {
 
 			public void focusLost(FocusEvent e) {// 失去焦点
-				account_img.setIcon(new javax.swing.ImageIcon("素材//qq (1).png"));
+				ImageIcon iconOrigin = new ImageIcon("素材//房间1.png");
+				Image image = iconOrigin.getImage();
+				Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+				account_img.setIcon(new javax.swing.ImageIcon(newImage));
 				lie1.setIcon(new javax.swing.ImageIcon("素材//直线2.png"));
 				c = 0;
 				if (roomID.getText().isEmpty()) {// 判断是否为空（为了设置默认提示语）
@@ -187,7 +195,10 @@ public class JoinRoomFrame extends JFrame implements MouseListener {
 				a = 1;
 				c = 1;
 				b = 0;
-				account_img.setIcon(new javax.swing.ImageIcon("素材//qq (2).png"));
+				ImageIcon iconOrigin = new ImageIcon("素材//房间.png");
+				Image image = iconOrigin.getImage();
+				Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+				account_img.setIcon(new javax.swing.ImageIcon(newImage));
 				if (roomID.getText().equals("房间号")) {
 					roomID.setText("");
 				} else {
@@ -231,7 +242,7 @@ public class JoinRoomFrame extends JFrame implements MouseListener {
 		getContentPane().add(small_mig);
 		getContentPane().add(close_img);
 		getContentPane().add(Title_img);
-		getContentPane().add(poker_img);
+		//getContentPane().add(poker_img);
 		getContentPane().add(small_btn);
 		getContentPane().add(close_btn);
 		//getContentPane().add(tu);

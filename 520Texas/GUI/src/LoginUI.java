@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,17 +44,21 @@ public class LoginUI extends JFrame implements MouseListener {
 	public LoginUI() {
 
 //ÊµÀý»¯
-		bacgrangd = new JLabel(new ImageIcon("ËØ²Ä//timg.gif"));
+		bacgrangd = new JLabel(new ImageIcon("ËØ²Ä//timg.jpeg"));
 		small_mig = new JLabel(new ImageIcon("ËØ²Ä//×îÐ¡»¯.png"));
 		close_img = new JLabel(new ImageIcon("ËØ²Ä//¹Ø±Õ.png"));
-		poker_img = new JLabel(new ImageIcon("ËØ²Ä//poker.jpg"));
+		//poker_img = new JLabel(new ImageIcon("ËØ²Ä//poker.jpg"));
 		Title_img = new JLabel("µÇÂ¼");
 		small_btn = new JLabel();
 		close_btn = new JLabel();// °µµ÷
-		tu = new JLabel(new ImageIcon("ËØ²Ä//Í·Ïñ.png"));
+		//tu = new JLabel(new ImageIcon("ËØ²Ä//Í·Ïñ.png"));
 		user = new JTextField();
 		pass = new JPasswordField();
-		account_img = new JLabel(new ImageIcon("ËØ²Ä//poker.jpg"));
+		ImageIcon iconOrigin = new ImageIcon("ËØ²Ä//ÕË»§1.png");
+		Image image = iconOrigin.getImage();
+		Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon icon = new ImageIcon(newImage);
+		account_img = new JLabel(icon);
 		password_img = new JLabel(new ImageIcon("ËØ²Ä//ÃÜÂë.png"));
 		lie1 = new JLabel(new ImageIcon("ËØ²Ä//Ö±Ïß2.png"));
 		lie2 = new JLabel(new ImageIcon("ËØ²Ä//Ö±Ïß2.png"));
@@ -73,11 +78,11 @@ public class LoginUI extends JFrame implements MouseListener {
 		bacgrangd.setBounds(-29, -123, 500, 250);
 		small_mig.setBounds(364, 2, 32, 32);
 		close_img.setBounds(396, 3, 32, 32);
-		poker_img.setBounds(10, 10, 45, 32);
-		Title_img.setBounds(50, 5, 71, 47);
+		//poker_img.setBounds(10, 10, 45, 32);
+		Title_img.setBounds(10, 5, 71, 47);
 		small_btn.setBounds(361, 0, 35, 35);
 		close_btn.setBounds(395, 0, 35, 35);
-		tu.setBounds(170, 80, 90, 85);
+		//tu.setBounds(170, 80, 90, 85);
 		user.setBounds(130, 160, 180, 40);
 		pass.setBounds(130, 200, 180, 40);
 		account_img.setBounds(100, 170, 20, 20);
@@ -177,7 +182,10 @@ public class LoginUI extends JFrame implements MouseListener {
 		user.addFocusListener(new FocusListener() {
 
 			public void focusLost(FocusEvent e) {// Ê§È¥½¹µã
-				account_img.setIcon(new javax.swing.ImageIcon("ËØ²Ä//qq (1).png"));
+				ImageIcon iconOrigin = new ImageIcon("ËØ²Ä//ÕË»§1.png");
+				Image image = iconOrigin.getImage();
+				Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+				account_img.setIcon(new javax.swing.ImageIcon(newImage));
 				lie1.setIcon(new javax.swing.ImageIcon("ËØ²Ä//Ö±Ïß2.png"));
 				c = 0;
 				if (user.getText().isEmpty()) {// ÅÐ¶ÏÊÇ·ñÎª¿Õ£¨ÎªÁËÉèÖÃÄ¬ÈÏÌáÊ¾Óï£©
@@ -192,7 +200,10 @@ public class LoginUI extends JFrame implements MouseListener {
 				a = 1;
 				c = 1;
 				b = 0;
-				account_img.setIcon(new javax.swing.ImageIcon("ËØ²Ä//qq (2).png"));
+				ImageIcon iconOrigin = new ImageIcon("ËØ²Ä//ÕË»§.png");
+				Image image = iconOrigin.getImage();
+				Image newImage = image.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+				account_img.setIcon(new javax.swing.ImageIcon(newImage));
 				if (user.getText().equals("ÕË»§")) {
 					user.setText("");
 				} else {
@@ -236,10 +247,10 @@ public class LoginUI extends JFrame implements MouseListener {
 		getContentPane().add(small_mig);
 		getContentPane().add(close_img);
 		getContentPane().add(Title_img);
-		getContentPane().add(poker_img);
+		//getContentPane().add(poker_img);
 		getContentPane().add(small_btn);
 		getContentPane().add(close_btn);
-		getContentPane().add(tu);
+		//getContentPane().add(tu);
 		getContentPane().add(lie1);
 		getContentPane().add(lie2);
 		getContentPane().add(user);
@@ -309,8 +320,10 @@ public class LoginUI extends JFrame implements MouseListener {
 			String users = user.getText();
 			String password = new String(pass.getPassword());
 			String token = "";
+			String pub_ip = "101.201.197.43";
 			try{
-				String path = "//localhost:12200/Server";
+				//tring path = "//localhost:12200/Server";
+				String path = "rmi://"+pub_ip+":12200/Server";
 				IServer s  = (IServer)Naming.lookup(path);
 				token = s.service_login(users, password);
 			} catch(Exception ee) {

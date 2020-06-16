@@ -71,7 +71,7 @@ public class TexasPokerFrame  {
 
 	public Timer timer;
 	public ConnectJob job;
-
+	public String roomId;
 	/*
 	 * Launch the application.
 	 */
@@ -79,7 +79,7 @@ public class TexasPokerFrame  {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					final TexasPokerFrame window = new TexasPokerFrame("" ,  null);
+					final TexasPokerFrame window = new TexasPokerFrame("" ,  null, "id");
 					window.frame.setVisible(true);
 				} catch (final Exception e) {
 					e.printStackTrace();
@@ -91,10 +91,11 @@ public class TexasPokerFrame  {
 	/**
 	 * Create the application.
 	 */
-	public TexasPokerFrame(String token, HallUI parent) {
+	public TexasPokerFrame(String token, HallUI parent, String roomId) {
 		this.token = token;
 		//this.hallController = hallController;
 		this.parent = parent;
+		this.roomId = roomId;
 		/** Initialize Card I
 		 * cons */
 		for (int suit = 0; suit < publicCardLabels.length; ++ suit){
@@ -178,17 +179,23 @@ public class TexasPokerFrame  {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 				try {
-					frame.setVisible(false);
-					System.out.println("退出房间");
-					JSONObject obj = new JSONObject();
-					obj.put("token", token);
-					String res =TexasHttpUtils.request("localhost:8888", "hall", "exit", obj.toString());
-					System.out.println(res);
-					TexasHttpUtils.updateByJEvent(res, TexasPokerFrame.this.parent);
-					TexasPokerFrame.this.timer.stop();
-					frame.dispose();
-					
-					TexasPokerFrame.this.parent.backFromGame();
+					if(TexasPokerFrame.this.job.croom == false) {
+						JOptionPane.showMessageDialog(TexasPokerFrame.this.frame, "请在这局游戏结束后再退出，感谢！");
+						return;
+					} else {
+						frame.setVisible(false);
+						System.out.println("退出房间");
+						JSONObject obj = new JSONObject();
+						obj.put("token", token);
+						String res =TexasHttpUtils.request("localhost:8888", "hall", "exit", obj.toString());
+						System.out.println(res);
+						TexasHttpUtils.updateByJEvent(res, TexasPokerFrame.this.parent);
+						TexasPokerFrame.this.timer.stop();
+						frame.dispose();
+						
+						TexasPokerFrame.this.parent.backFromGame();
+					}
+
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -203,7 +210,7 @@ public class TexasPokerFrame  {
 	 */
 	private void initialize() {
 		//		Point origin = new Point();
-		frame.setTitle("牌桌");
+		frame.setTitle("牌桌" + this.roomId);
 		frame.setBounds(100, 100, 1200, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setUndecorated(false);
@@ -449,8 +456,8 @@ public class TexasPokerFrame  {
 			case 4:
 				this.eastPanel.add(player.get(1));
 				this.eastPanel.add(player.get(0));
-				this.westPanel.add(player.get(3));
 				this.westPanel.add(player.get(2));
+				this.westPanel.add(player.get(3));
 				break;
 		}
 		return;

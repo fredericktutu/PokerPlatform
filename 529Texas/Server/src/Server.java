@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-
+import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -20,6 +20,7 @@ public class Server {
     Hall hall;
     TexasPlayerController texasPlayerController;
     HallController hallController;
+    Connection c;
 
     public Server(){
         activePlayers = new HashMap<String, Player>();
@@ -57,12 +58,12 @@ public class Server {
     public boolean service_register(String id, String name, String passWord){ 
         //Check if the id is unique or not
         Statement stmt = null;
-        Connection c = null;
+        //Connection c = null;
         String encoded_psw = PasswordEncryption.encrypt(passWord);
         try{
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:users.db");
-            c.setAutoCommit(false);
+            //Class.forName("org.sqlite.JDBC");
+            //c = DriverManager.getConnection("jdbc:sqlite:users.db");
+            //c.setAutoCommit(false);
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYERS WHERE ID = '" + id +"';");
             if(!rs.next())
@@ -77,7 +78,7 @@ public class Server {
                 stmt0.executeUpdate();
                 stmt.close();
                 c.commit();
-                c.close();
+                //c.close();
                 System.out.println("Account created successfully!");
                 return true;
             }
@@ -95,13 +96,13 @@ public class Server {
     }
     
     public ArrayList<String> service_login(String id, String passWord) {
-        Connection c = null;
+        //Connection c = null;
         Statement stmt = null;
         ArrayList<String>res = new ArrayList<String>();
         try{
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:users.db");
-            c.setAutoCommit(false);
+            //Class.forName("org.sqlite.JDBC");
+            //c = DriverManager.getConnection("jdbc:sqlite:users.db");
+            //c.setAutoCommit(false);
             stmt = c.createStatement();
             //System.out.println("SELECT * FROM PLAYERS WHERE ID = '" + id +"';");
             ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYERS WHERE ID = '" + id +"';");
@@ -109,7 +110,7 @@ public class Server {
             {
                 System.out.println("This account does not exist!");
                 stmt.close();
-                c.close();
+                //c.close();
                 res.add("");
                 return res;
             }
@@ -125,7 +126,7 @@ public class Server {
                 int win = rs.getInt("WIN");
                 int lose = rs.getInt("LOSE");
                 stmt.close();
-                c.close();
+               // c.close();
                 String ep = PasswordEncryption.encrypt(passWord);
                 if(passwd.equals(ep)) {
                     System.out.println(name + " " + money + " " + win + " " + lose);
@@ -165,13 +166,13 @@ public class Server {
     public boolean service_update_money(String id, int money) { 
         this.w.lock();
         System.out.println("Server: service update_money");
-        Connection c = null;
+        //Connection c = null;
         PreparedStatement stmt = null;
         try{
             System.out.println("Server: before sql");
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:users.db");
-            c.setAutoCommit(false);
+            //Class.forName("org.sqlite.JDBC");
+            //c = DriverManager.getConnection("jdbc:sqlite:users.db");
+            //c.setAutoCommit(false);
             System.out.println("Server: create sql");
             String sql = "UPDATE PLAYERS SET MONEY = (?) WHERE ID = (?);";//???
             stmt = c.prepareStatement(sql);
@@ -180,14 +181,14 @@ public class Server {
             stmt.executeUpdate();
             stmt.close();
             c.commit();
-            c.close();
+            //c.close();
             
             System.out.println("Money updated successfully!");
             this.w.unlock();
             return  true;
         }catch(Exception e)
         {
-            System.out.println("This ID is invalid!");
+            System.out.println(e.getMessage());
         }
         this.w.unlock();
         return false;
@@ -198,12 +199,12 @@ public class Server {
     //Update user's wins and loses when he or she exit the room
     public boolean service_update_record(String id, boolean win) { 
         this.w.lock();
-        Connection c = null;
+        //Connection c = null;
         Statement stmt = null;
         try{
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:users.db");
-            c.setAutoCommit(false);
+            //Class.forName("org.sqlite.JDBC");
+            //c = DriverManager.getConnection("jdbc:sqlite:users.db");
+            //c.setAutoCommit(false);
             stmt = c.createStatement();
 //???
             ResultSet rs = stmt.executeQuery("SELECT WIN, LOSE FROM PLAYERS WHERE ID = '" + id +"';");
@@ -224,14 +225,14 @@ public class Server {
             stmt0.executeUpdate();
             stmt0.close();
             c.commit();
-            c.close();
+           //c.close();
             System.out.println("Wins&Loses updated successfully!");
             this.w.lock();
             return true;
         }catch(Exception e)
         {   
-            e.printStackTrace();
-            System.out.println("This ID is invalid!");
+            System.out.println(e.getMessage());
+
         }
         this.w.lock();
         return false;
@@ -242,11 +243,13 @@ public class Server {
 
 
     public void service_deploy() {//initialize the data base when server start to work
-        Connection c = null;
+        //Connection c = null;
         Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:users.db");
+            c.setAutoCommit(false);
+            c.setNetworkTimeout(Executors.newFixedThreadPool(5), 3000);
             System.out.println("Opened database successfully");  
             stmt = c.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS PLAYERS" +

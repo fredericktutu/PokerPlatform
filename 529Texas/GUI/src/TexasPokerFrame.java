@@ -449,8 +449,8 @@ public class TexasPokerFrame  {
 			case 4:
 				this.eastPanel.add(player.get(1));
 				this.eastPanel.add(player.get(0));
-				this.westPanel.add(player.get(3));
 				this.westPanel.add(player.get(2));
+				this.westPanel.add(player.get(3));
 				break;
 		}
 		return;

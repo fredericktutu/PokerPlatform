@@ -51,6 +51,7 @@ public class JPlayerMyselfPanel extends JPanel {
 	public int followTo;
 	public String token;
 	ConnectJob job;
+	public JLabel[] back = new JLabel[2];
 	//public ITexasGameController controller;
 	
 	
@@ -490,21 +491,45 @@ public class JPlayerMyselfPanel extends JPanel {
 		this.add(middlePanel);
 		this.add(rightPanel);
 		
+		//back cards
+		ImageIcon iconOrigin = new ImageIcon(
+			"./ËØ²Ä/back.png"
+		);
+		Image image = iconOrigin.getImage();
+		Image newImage = image.getScaledInstance(117, 117, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon icon = new ImageIcon(newImage);
+	
+		Dimension dim2 = new Dimension(117, 117);
+		JLabel back0 = new JLabel();
+		back0.setIcon(icon);
+		back0.setSize(dim2);
+		back0.setMaximumSize(dim2);
+		back0.setMinimumSize(dim2);
+		back0.setPreferredSize(dim2);
+
+		JLabel back1 = new JLabel();
+		back1.setIcon(icon);
+		back1.setSize(dim2);
+		back1.setMaximumSize(dim2);
+		back1.setMinimumSize(dim2);
+		back1.setPreferredSize(dim2);
+		back[0] = back0;
+		back[1] = back1;
 		
 
 		/** test update public cards */
-		final Card card1 = new Card(2, 0); 
-		final Card card2 = new Card(2, 4);
+		//final Card card1 = new Card(2, 0); 
+		//final Card card2 = new Card(2, 4);
 		
 		//Card card5 = new Card(4, 1);
-		final ArrayList<Card> testPublicCards = new ArrayList<Card>();
-		testPublicCards.add(card1);
-		testPublicCards.add(card2);
+		//final ArrayList<Card> testPublicCards = new ArrayList<Card>();
+		//testPublicCards.add(card1);
+		//testPublicCards.add(card2);
 		
 		//testPublicCards.add(card5);
 
-		this.updatePrivateCards(testPublicCards);
-		
+		//this.updatePrivateCards(testPublicCards);
+		this.updatePrivateCards();
 
 	}
 
@@ -523,6 +548,21 @@ public class JPlayerMyselfPanel extends JPanel {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void updatePrivateCards() {
+		cardPanel.removeAll();
+		cardPanel.repaint();
+		//System.out.println(back[0]);
+		//System.out.println("JPlayerPanel: ·­Ãæ");
+		back[0].setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		back[1].setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		cardPanel.add(back[0]);
+		cardPanel.add(back[1]);
+
+
+		cardPanel.validate();
+		cardPanel.revalidate();
+	}
+
 	public void updatePrivateCards(final ArrayList<Card> privateCards) {
 		cardPanel.removeAll();
 
